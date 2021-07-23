@@ -12,7 +12,7 @@ public class Philosopher implements Runnable {
         this.eatTime = eatTime;
         this.thinkTime = thinkTime;
 
-        new Thread((Runnable) this, "Philopher - " + positionAtTable).start();
+        new Thread((Runnable) this, "Philosopher - " + positionAtTable).start();
     }
 
     @Override
@@ -26,19 +26,19 @@ public class Philosopher implements Runnable {
     }
 
     private void getCutlery() {
-        states.transitionToHungry(position);
+        states.transitionToState(position, PhilosopherState.HUNGRY);
         System.out.println(String.format("The philosopher %s are waiting to eat", this.position));
     }
 
     private void dropCutlery() {
-        states.transitionToThinking(position);
-        dinnersEaten++;
+        states.transitionToState(position, PhilosopherState.THINKING);
     }
 
     private void eat() {
         try {
             System.out.println(String.format("The philosopher %s was starting eating.", this.position, this.dinnersEaten));
             Thread.sleep(this.eatTime);
+            dinnersEaten++;
             System.out.println(String.format("The philosopher %s stopped eating. Has eaten %o times.", this.position, this.dinnersEaten));
         } catch (InterruptedException e) {
             e.printStackTrace();

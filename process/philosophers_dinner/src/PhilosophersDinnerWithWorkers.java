@@ -9,7 +9,7 @@ public class PhilosophersDinnerWithWorkers {
         SharedPhilosophersStates states = new SharedPhilosophersStatesWorker(numberOfPhilosophers);
 
         for (int i = 0; i < numberOfPhilosophers; i++) {
-            new Philosopher(states, i, EAT_TIME, THINK_TIME);
+            new OtherPhilosopher(states, i, EAT_TIME, THINK_TIME);
         }
     }
 }
